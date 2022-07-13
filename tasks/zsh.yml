@@ -1,0 +1,15 @@
+- name: Install ZSH
+  apt:
+    name: zsh
+
+- name: Change default shell
+  shell: chsh -s $(which zsh)
+
+- name: Install ohmyzsh
+  shell: curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh > ~/.oh-my-installer && chmod +x ~/.oh-my-installer && ~/.oh-my-installer
+  become_user: "{{ lookup('env', 'USER') }}"
+
+- name: Install zsh-autosuggestions
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/zsh-autosuggestions.git"
+    dest: "~/.oh-my-zsh/plugins/zsh-autosuggestions"

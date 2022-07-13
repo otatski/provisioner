@@ -1,0 +1,30 @@
+- hosts: localhost
+  gather_facts: true
+  become: true
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  vars:
+    home: "{{ lookup('env', 'HOME') }}"
+
+  pre_tasks:
+    - name: Update Apt
+      become_user: root
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+
+  tasks:
+    - include: tasks/general.yml
+    - include: tasks/cac_setup.yml
+    - include: tasks/zsh.yml
+    - include: tasks/vim.yml
+    - include: tasks/c.yml
+    - include: tasks/python.yml
+    - include: tasks/golang.yml
+    - include: tasks/node.yml
+    - include: tasks/rust.yml
+    - include: tasks/docker.yml
+    - include: tasks/vagrant.yml
+    - include: tasks/neovim_config.yml
+    - include: tasks/kitty.yml

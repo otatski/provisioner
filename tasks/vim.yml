@@ -1,0 +1,7 @@
+- name: Add neovim repo
+  apt_repository:
+    repo: ppa:neovim-ppa/stable
+
+- name: Install Terminal Text Editors
+  apt:
+    name: [vim, neovim]

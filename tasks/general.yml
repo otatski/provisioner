@@ -1,0 +1,17 @@
+- name: Install General Utilities
+  apt:
+    name:
+      [
+        build-essential,
+        strace,
+        tmux,
+        valgrind,
+        curl,
+        wget,
+        wireshark,
+        htop,
+        openssh-client,
+        unzip,
+        fzf,
+        fontconfig,
+      ]

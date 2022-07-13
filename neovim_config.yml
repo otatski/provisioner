@@ -1,0 +1,29 @@
+- name: Install copy/paste support
+  apt:
+    name: [xsel, wl-clipboard]
+
+- name: Rename nvim config
+  shell: mv ~/.config/nvim ~/.config/old_nvim
+
+- name: Add neovim config
+  ansible.builtin.git:
+    repo: "https://github.com/LunarVim/nvim-basic-ide.git"
+    dest: ~/.config/nvim
+    clone: yes
+
+- name: Add neovim python support
+  shell: pip install pyvim
+
+- name: Add neovim node support
+  shell: npm i -g neovim
+
+- name: Add neovim telescope support for ripgrep
+  apt:
+    name: [ripgrep]
+
+- name: Install NerdFonts with getnf
+  ansible.builtin.git:
+    repo: ["https://github.com/ronniedroid/getnf.git"]
+  shell: |
+    cd getnf
+    ./install.sh
