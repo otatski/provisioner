@@ -25,6 +25,6 @@
     - include: tasks/node.yml
     - include: tasks/rust.yml
     - include: tasks/docker.yml
-    - include: tasks/vagrant.yml
+    # - include: tasks/vagrant.yml
     - include: tasks/neovim_config.yml
     - include: tasks/kitty.yml
