@@ -21,9 +21,9 @@
   apt:
     name: [ripgrep]
 
-- name: Install NerdFonts with getnf
-  ansible.builtin.git:
-    repo: ["https://github.com/ronniedroid/getnf.git"]
-  shell: |
-    cd getnf
-    ./install.sh
+# - name: Install NerdFonts with getnf
+#   ansible.builtin.git:
+#     repo: ["https://github.com/ronniedroid/getnf.git"]
+#   shell: |
+#     cd getnf
+#     ./install.sh
