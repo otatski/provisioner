@@ -16,7 +16,7 @@
 
   tasks:
     - include: tasks/general.yml
-    - include: tasks/cac_setup.yml
+    # - include: tasks/cac_setup.yml
     - include: tasks/zsh.yml
     - include: tasks/vim.yml
     - include: tasks/c.yml
