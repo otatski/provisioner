@@ -1,4 +1,5 @@
 - name: Install General Utilities
+  become: true
   apt:
     name:
       [
@@ -8,7 +9,6 @@
         valgrind,
         curl,
         wget,
-        wireshark,
         htop,
         openssh-client,
         unzip,
