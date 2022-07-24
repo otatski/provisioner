@@ -3,7 +3,7 @@
 
 - name: Checking if ~/.local/bin exists
   stat:
-    path: "~/.local/bin/"
+    path: "/home/{{ user }}/.local/bin/"
   register: local_bin
 
 - name: Creating ~/.local/bin
@@ -12,6 +12,6 @@
 
 - name: Add kitty desktop integration
   shell: |
-    ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    ln -s /home/{{ user }}/.local/kitty.app/bin/kitty /home/{{ user }}/.local/bin/
+    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" /home/{{ user }}/.local/share/applications/kitty*.desktop
+    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" /home/{{ user }}/.local/share/applications/kitty*.desktop

@@ -8,7 +8,7 @@
 
   pre_tasks:
     - name: Update Apt
-      become: true
+      become_user: root
       apt:
         force_apt_get: true
         update_cache: true
@@ -17,7 +17,7 @@
   tasks:
     # - include: tasks/general.yml
     # - include: tasks/zsh.yml
-    # - include: tasks/vim.yml
+    - include: tasks/vim.yml
     # - include: tasks/c.yml
     # - include: tasks/python.yml
     # - include: tasks/golang.yml

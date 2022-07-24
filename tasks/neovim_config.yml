@@ -1,19 +1,40 @@
 - name: Checking if neovim config is present
   stat:
-    path: /home/{{ lookup('env', 'USER') }}/.config/nvim
-    register: nvim_config_check
+    path: ~/.config/nvim
+    # checksum_algorithm: md5
+  register: nvim_check
 
 - name: Backup old neovim config
   shell: mv ~/.config/nvim ~/.config/nvim.bak
-  when: nvim_config_check.stat.exists
+  when: nvim_check.stat.exists
 
-- name: Add neovim config
-  ansible.builtin.git:
-    repo: "https://github.com/AstroNvim/AstroNvim.git"
-    dest: ~/dotfiles/nvim/.config/nvim
-    clone: yes
+- name: Check if neovim config is in dotfiles
+  stat:
+    path: ~/dotfiles/nvim/.config/nvim
+  register: nvim_dotfile_check
+
+- name: Delete old nvim config
+  shell: rm -rf ~/dotfiles/nvim/.config/nvim
+  when: nvim_dotfile_check.stat.exists
+
+- name: Check if neovim site files exist
+  stat:
+    path: ~/.local/share/nvim/site
+  register: nvim_site_check
+
+- name: Delete old neovim site files
+  shell: rm -rf ~/.local/share/nvim/site
+  when: nvim_site_check.stat.exists
+
+- name: Add AstroNvim to dotfiles
+  shell: |
+    git clone https://github.com/AstroNvim/AstroNvim.git
+    cd AstroNvim
+    git checkout v2
+    cd ../
+    mv AstroNvim ~/dotfiles/nvim/.config/nvim
 
 - name: Copy user config files for neovim
   shell: |
     cp -r ~/dotfiles/.nvim_config/user ~/dotfiles/nvim/.config/nvim/lua
-    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
