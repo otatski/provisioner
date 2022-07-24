@@ -1,32 +1,20 @@
-- name: Install node
-  apt:
-    name: [
-      nodejs,
-      npm,
-    ]
+- name: Install NVM
+  shell: wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+- name: Install npm
+  shell: nvm install npm
 
 - name: Install Yarn
-  npm:
-    name: yarn
-    global: yes
+  shell: nvm install yarn
 
 - name: Install eslint
-  npm:
-    name: eslint
-    global: yes
+  shell: npm install -g eslint
 
 - name: Install Typescript
-  npm:
-    name: typescript
-    global: yes
-
-- name: Install n
-  npm:
-    name: n
-    global: yes
-
-- name: Set npm version
-  shell: n 14
+  shell: npm install -g typescript
 
 - name: Install Vue.js
   shell: npm install -g @vue/cli
+
+- name: Install Quasar
+  shell: npm install -g @quasar-cli

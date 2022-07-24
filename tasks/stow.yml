@@ -1,0 +1,5 @@
+- name: Stow dotfiles
+  args:
+    chdir: ~/dotfiles
+  shell: |
+    make all

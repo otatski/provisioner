@@ -1,0 +1,14 @@
+- name: Add neovim python support
+  shell: pip install pyvim
+
+- name: Add neovim node support
+  shell: npm i -g neovim
+
+- name: Add neovim telescope support for ripgrep
+  apt:
+    name: [ripgrep]
+
+- name: Install copy/paste support
+  become: true
+  apt:
+    name: [xsel, wl-clipboard]

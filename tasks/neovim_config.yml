@@ -1,29 +1,19 @@
-- name: Install copy/paste support
-  apt:
-    name: [xsel, wl-clipboard]
+- name: Checking if neovim config is present
+  stat:
+    path: /home/{{ lookup('env', 'USER') }}/.config/nvim
+    register: nvim_config_check
 
-- name: Rename nvim config
-  shell: mv ~/.config/nvim ~/.config/old_nvim
+- name: Backup old neovim config
+  shell: mv ~/.config/nvim ~/.config/nvim.bak
+  when: nvim_config_check.stat.exists
 
 - name: Add neovim config
   ansible.builtin.git:
-    repo: "https://github.com/LunarVim/nvim-basic-ide.git"
-    dest: ~/.config/nvim
+    repo: "https://github.com/AstroNvim/AstroNvim.git"
+    dest: ~/dotfiles/nvim/.config/nvim
     clone: yes
 
-- name: Add neovim python support
-  shell: pip install pyvim
-
-- name: Add neovim node support
-  shell: npm i -g neovim
-
-- name: Add neovim telescope support for ripgrep
-  apt:
-    name: [ripgrep]
-
-# - name: Install NerdFonts with getnf
-#   ansible.builtin.git:
-#     repo: ["https://github.com/ronniedroid/getnf.git"]
-#   shell: |
-#     cd getnf
-#     ./install.sh
+- name: Copy user config files for neovim
+  shell: |
+    cp -r ~/dotfiles/.nvim_config/user ~/dotfiles/nvim/.config/nvim/lua
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

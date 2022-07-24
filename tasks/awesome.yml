@@ -1,0 +1,6 @@
+- name: Install awesome
+  apt:
+    name: awesome
+    state: present
+    update: yes
+    accept_key: yes
