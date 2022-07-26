@@ -1,5 +1,10 @@
-- name: Stow dotfiles
-  args:
-    chdir: ~/dotfiles
+- name: Installing stow
+  apt:
+    name: stow
+
+- name: Stowing Dotfiles
   shell: |
+    cd {{ home }}/dotfiles
+    make delete
     make all
+    cd {{ home }}/provisioner
