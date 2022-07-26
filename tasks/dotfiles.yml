@@ -5,4 +5,4 @@
     recursive: yes
     update: yes
     accept_hostkey: yes
-    version: config_v2
+    version: master
