@@ -24,8 +24,9 @@
     # - include: tasks/node.yml
     # - include: tasks/rust.yml
     # - include: tasks/awsome.yml
-    - include: tasks/nvim_support.yml
-    - include: tasks/neovim_config.yml
+    # - include: tasks/nvim_support.yml
+    # - include: tasks/neovim_config.yml
     # - include: tasks/kitty.yml
     # - include: tasks/dotfiles.yml
     - include: tasks/stow.yml
+    - include: tasks/xmodmap.yml

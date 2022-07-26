@@ -1,0 +1,4 @@
+
+- name: Source xmodmap config
+  shell: |
+    xmodmap {{home}}/.config/.Xmodmap
