@@ -1,6 +1,6 @@
 - name: Checking if neovim config is present
   stat:
-    path: {{home}}/.config/nvim
+    path: /{{home}}/.config/nvim
   register: nvim_check
 
 - name: Backup old neovim config
@@ -9,7 +9,7 @@
 
 - name: Check if neovim config is in dotfiles
   stat:
-    path: {{home}}/dotfiles/nvim/.config/nvim
+    path: /{{home}}/dotfiles/nvim/.config/nvim
   register: nvim_dotfile_check
 
 - name: Delete old nvim config
@@ -18,7 +18,7 @@
 
 - name: Check if neovim site files exist
   stat:
-    path: {{home}}/.local/share/nvim/site
+    path: /{{home}}/.local/share/nvim/site
   register: nvim_site_check
 
 - name: Delete old neovim site files
