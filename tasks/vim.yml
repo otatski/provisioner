@@ -11,7 +11,7 @@
 #     name: neovim
 #     state: present
 
-- name: Install Terminal Text Editors
-  become: true
-  apt:
-    name: [vim]
+#- name: Install Terminal Text Editors
+#  become: true
+#  apt:
+#    name: [vim]

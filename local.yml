@@ -17,12 +17,12 @@
   tasks:
     # - include: tasks/general.yml
     # - include: tasks/zsh.yml
-    # - include: tasks/vim.yml
+    - include: tasks/vim.yml
     # - include: tasks/c.yml
     # - include: tasks/python.yml
     # - include: tasks/golang.yml
     # - include: tasks/node.yml
-    # - include: tasks/rust.yml
+    - include: tasks/rust.yml
     # - include: tasks/awsome.yml
     - include: tasks/nvim_support.yml
     - include: tasks/neovim_config.yml

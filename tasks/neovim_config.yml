@@ -4,16 +4,16 @@
   register: nvim_check
 
 - name: Backup old neovim config
-  shell: mv {{home}}/.config/nvim ~/.config/nvim.bak
+  shell: mv /{{home}}/.config/nvim /{{home}}/.config/nvim.bak
   when: nvim_check.stat.exists
 
 - name: Check if neovim config is in dotfiles
   stat:
-    path: /{{home}}/dotfiles/nvim/.config/nvim
+    path: /{{home}}/dotfiles/nvim
   register: nvim_dotfile_check
 
 - name: Delete old nvim config
-  shell: rm -rf {{home}}/dotfiles/nvim/.config/nvim
+  shell: rm -rf /{{home}}/dotfiles/nvim
   when: nvim_dotfile_check.stat.exists
 
 - name: Check if neovim site files exist
@@ -25,11 +25,33 @@
   shell: rm -rf {{home}}/.local/share/nvim/site
   when: nvim_site_check.stat.exists
 
-- name: Add AstroNvim to dotfiles
+- name: Check if Astrovim exists
+  stat:
+    path: /{{home}}/provisioner/AstroNvim
+  register: astrocheck
+
+- name: Deleting old Astrovim
+  shell: rm -rf AstroNvim
+  when: astrocheck.stat.exists
+
+- name: Clone Astrovim
   shell: |
     git clone https://github.com/AstroNvim/AstroNvim.git
-    mv AstroNvim {{home}}/dotfiles/nvim/.config/nvim
+
+- name: Checking if nvim exists in dotfiles
+  stat:
+    path: /{{home}}/dotfiles/nvim/.config/nvim
+  register: confcheck
+
+- name: Creating nvim folder in dotfiles
+  shell: |
+    mkdir {{home}}/dotfiles/nvim/
+    mkdir {{home}}/dotfiles/nvim/.config
+
+- name: Add Astrovim to dotfiles
+  shell: |
+    mv AstroNvim /{{home}}/dotfiles/nvim/.config/nvim
 
 - name: Copy user config files for neovim
   shell: |
-    cp -r {{home}}/dotfiles/.nvim_config/user {{home}}/dotfiles/nvim/.config/nvim/lua
+    cp -r /{{home}}/dotfiles/.nvim_config/user /{{home}}/dotfiles/nvim/.config/nvim/lua
